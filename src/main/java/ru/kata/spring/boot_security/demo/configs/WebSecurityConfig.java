@@ -29,14 +29,12 @@ import java.util.Set;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private DataSource dataSource;
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     private final SuccessUserHandler successUserHandler;
-    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserService userService) {
         this.successUserHandler = successUserHandler;
+        this.userService = userService;
     }
 
     @Override
@@ -53,20 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin() //.successHandler(successUserHandler)
                     .loginPage("/login")
                     .permitAll()
-                    .successHandler(new AuthenticationSuccessHandler() {
-                        @Override
-                        public void onAuthenticationSuccess(HttpServletRequest request
-                                , HttpServletResponse response
-                                , Authentication authentication)
-                                throws IOException, ServletException {
-                            Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-                            if (roles.contains("ADMIN")) {
-                                response.sendRedirect("/admin");
-                            } else {
-                                response.sendRedirect("/user");
-                            }
-                        }
-                    })
+                    .successHandler(new SuccessUserHandler())
                 .and()
                     .logout()
                     .logoutSuccessUrl("/index")
