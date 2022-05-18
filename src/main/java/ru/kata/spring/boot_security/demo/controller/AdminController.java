@@ -42,7 +42,7 @@ public class AdminController {
     }
     @PostMapping(value = "/user-update")
     public String updateUser(User user) {
-        userService.save(user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
@@ -52,7 +52,7 @@ public class AdminController {
     }
     @PostMapping(value = "/user-create")
     public String createUser(User user) {
-        userService.save(user);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 

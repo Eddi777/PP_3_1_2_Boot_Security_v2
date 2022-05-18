@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordEncoder(NoOpPasswordEncoder.getInstance())
 //                .usersByUsernameQuery("select username, password, active from users where username=?")
 //                .authoritiesByUsernameQuery("select u.username, ur.roles from users u inner join user_roles ur on u.id=ur.user_id where u.username=?");
-
+//    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)

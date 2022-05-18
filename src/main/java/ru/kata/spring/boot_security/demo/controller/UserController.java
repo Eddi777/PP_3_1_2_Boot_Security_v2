@@ -27,7 +27,7 @@ public class UserController {
     }
     @GetMapping(value="/user-update")
     public String userUpdate(User user) {
-        userService.save(user);
+        userService.updateUser(user);
         return "redirect:/user";
     }
 

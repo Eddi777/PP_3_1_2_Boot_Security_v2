@@ -14,33 +14,41 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+//    private final UserRepositoryCRUD userRepositoryCRUD;
     public UserService(UserRepository userRepository) {
+//        this.userRepositoryCRUD = userRepositoryCRUD;
         this.userRepository = userRepository;
     }
 
-    public User userByUsername(String username){
-        return userRepository.findByUsername(username);
+    public User getUserByUsername(String username){
+        return userRepository.getUserByUsername(username);
+//        return userRepositoryCRUD.findByUsername(username);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public void saveUser(User user) {
+        userRepository.saveUser(user);
+//        userRepositoryCRUD.save(user);
     }
-
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+    }
     public User findById(Long id) {
-        return userRepository.getOne(id);
+        return userRepository.getUserById(id);
+//        return userRepositoryCRUD.getOne(id);
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.getUsersList();
     }
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+//        userRepositoryCRUD.deleteById(id);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        return getUserByUsername(username);
     }
+
 }
