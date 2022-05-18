@@ -46,7 +46,6 @@ public class UserRepository {
     }
 
     public void updateUser(User user) {
-        System.out.println("Update user " + user);
         getEntityManager().getTransaction().begin();
         getEntityManager().merge(user);
         getEntityManager().getTransaction().commit();
