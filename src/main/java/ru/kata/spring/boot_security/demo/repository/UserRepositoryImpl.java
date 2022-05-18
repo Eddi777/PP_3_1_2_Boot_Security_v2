@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -10,11 +9,11 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserRepository {
+public class UserRepositoryImpl {
 
     @PersistenceUnit
     private final EntityManagerFactory entityManagerFactory;
-    public UserRepository(EntityManagerFactory entityManagerFactory) {
+    public UserRepositoryImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
     private EntityManager entityManager;

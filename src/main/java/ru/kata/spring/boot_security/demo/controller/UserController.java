@@ -1,22 +1,20 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
-    public UserController(UserService userService) {
-        this.userService = userService;
+    private final UserServiceImpl userServiceImpl;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
 
@@ -27,7 +25,7 @@ public class UserController {
     }
     @GetMapping(value="/user-update")
     public String userUpdate(User user) {
-        userService.updateUser(user);
+        userServiceImpl.updateUser(user);
         return "redirect:/user";
     }
 
