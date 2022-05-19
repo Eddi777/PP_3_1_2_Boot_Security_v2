@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserRepositoryImpl {
+public class UserRepositoryImpl implements UserRepository{
 
     @PersistenceUnit
     private final EntityManagerFactory entityManagerFactory;
@@ -39,6 +39,7 @@ public class UserRepositoryImpl {
     }
 
     public void saveUser(User user) {
+        System.out.println("Save user " + user);
         getEntityManager().getTransaction().begin();
         getEntityManager().persist(user);
         getEntityManager().getTransaction().commit();

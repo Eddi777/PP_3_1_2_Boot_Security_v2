@@ -1,47 +1,46 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.UserRepositoryImpl;
+import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepositoryImpl userRepositoryImpl;
-    public UserServiceImpl(UserRepositoryImpl userRepositoryImpl) {
-        this.userRepositoryImpl = userRepositoryImpl;
+    private final UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
     @Override
     public User getUserByUsername(String username){
-        return userRepositoryImpl.getUserByUsername(username);
+        return userRepository.getUserByUsername(username);
     }
 
     @Override
     public void saveUser(User user) {
-        userRepositoryImpl.saveUser(user);
+        userRepository.saveUser(user);
     }
     @Override
     public void updateUser(User user) {
-        userRepositoryImpl.updateUser(user);
+        userRepository.updateUser(user);
     }
     @Override
     public User findById(Long id) {
-        return userRepositoryImpl.getUserById(id);
+        return userRepository.getUserById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return userRepositoryImpl.getUsersList();
+        return userRepository.getUsersList();
     }
 
     @Override
     public void deleteById(Long id) {
-        userRepositoryImpl.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @Override

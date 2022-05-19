@@ -2,12 +2,9 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
+import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.util.List;
 
@@ -15,33 +12,33 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserServiceImpl userServiceImpl;
-    public AdminController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    private final UserService userService;
+    public AdminController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
     public String getAllUsers(Model model) {
-        List<User> users = userServiceImpl.findAll();
+        List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "admin-main";
     }
 
     @GetMapping(value = "/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-        userServiceImpl.deleteById(id);
+        userService.deleteById(id);
         return "redirect:/admin";
     }
 
     @GetMapping(value="/user-update/{id}")
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userServiceImpl.findById(id);
+        User user = userService.findById(id);
         model.addAttribute("user", user);
         return "admin_user-update";
     }
     @PostMapping(value = "/user-update")
     public String updateUser(User user) {
-        userServiceImpl.updateUser(user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
@@ -51,7 +48,7 @@ public class AdminController {
     }
     @PostMapping(value = "/user-create")
     public String createUser(User user) {
-        userServiceImpl.saveUser(user);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 

@@ -32,7 +32,7 @@
                 <td th:text="${user.lastname}"></td>
                 <td th:text="${user.age}"></td>
                 <td th:text="${user.username}"></td>
-                <td th:text="${user.roles}"></td>
+                <td th:text="${user.getRolesAsString()}"></td>
                 <td>
                     <a th:href="@{admin/user-update/{id}(id=${user.id})}">Update</a>
                     <a th:href="@{admin/user-delete/{id}(id=${user.id})}">Delete</a>
